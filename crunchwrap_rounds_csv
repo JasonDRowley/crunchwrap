@@ -1,0 +1,159 @@
+#
+#
+# Seed-Stage Rounds
+#
+#
+
+## Round Types
+
+seed_rounds = rounds[rounds.investment_type == 'seed']
+angel_rounds = rounds[rounds.investment_type == 'angel']
+preseed_rounds = rounds[rounds.investment_type == 'pre-seed']
+
+venture_noseries_seed = rounds[
+    (rounds.investment_type == 'series_unknown') & 
+    (rounds.raised_amount_usd <= int(1000000))
+    ]
+
+conv_note_seed = rounds[
+    (rounds.investment_type == 'convertible_note') & 
+    (rounds.raised_amount_usd <= int(1000000))
+    ]
+
+venture_undisclosed_seed = rounds[
+    (rounds.investment_type == 'undisclosed') & 
+    (rounds.raised_amount_usd <= int(1000000))
+    ]
+
+equity_crowdfunding_nan = rounds[
+    (rounds.investment_type == 'equity_crowdfunding') & 
+    (rounds.raised_amount_usd != rounds.raised_amount_usd)
+    ]
+
+equity_crowdfunding_seed = rounds[
+    (rounds.investment_type == 'equity_crowdfunding') & 
+    (rounds.raised_amount_usd <= int(1000000))
+    ]
+
+## Stage Aggregation
+
+seed_stage_rounds = pd.concat([
+    seed_rounds,
+    angel_rounds,
+    preseed_rounds,
+    venture_noseries_seed,
+    conv_note_seed,
+    venture_undisclosed_seed,
+    equity_crowdfunding_nan,
+    equity_crowdfunding_seed
+])
+
+#
+#
+#   Early Stage
+#
+#
+
+## Round Types
+
+series_a_rounds = rounds[rounds.investment_type == 'series_a']
+series_b_rounds = rounds[rounds.investment_type == 'series_b']
+
+venture_noseries_early = rounds[
+    (rounds.investment_type == 'series_unknown') & 
+    (rounds.raised_amount_usd >= int(1000001)) & 
+    (rounds.raised_amount_usd <= int(15000000))
+    ]
+
+venture_undisclosed_early = rounds[
+    (rounds.investment_type == 'undisclosed') & 
+    (rounds.raised_amount_usd >= int(1000001)) & 
+    (rounds.raised_amount_usd <= int(15000000))
+    ]
+
+equity_crowdfunding_early = rounds[
+    (rounds.investment_type == 'equity_crowdfunding') & 
+    (rounds.raised_amount_usd >= int(5000001)) & 
+    (rounds.raised_amount_usd <= int(15000000))
+    ]
+
+conv_note_early = rounds[
+    (rounds.investment_type == 'convertible_note') & 
+    (rounds.raised_amount_usd >= int(1000001)) & 
+    (rounds.raised_amount_usd <= int(15000000))
+    ]
+
+conv_note_nan = rounds[
+    (rounds.investment_type == 'convertible_note') & 
+    (rounds.raised_amount_usd != rounds.raised_amount_usd)
+    ]
+
+## Stage Aggregation
+
+early_stage_rounds = pd.concat([
+    series_a_rounds,
+    series_b_rounds,
+    venture_noseries_early,
+    venture_undisclosed_early,
+    equity_crowdfunding_early,
+    conv_note_early,
+    conv_note_nan
+    ])
+    
+#
+#
+#   Late-Stage
+#
+#
+    
+## Round Types
+
+series_c_rounds = rounds[rounds.investment_type == 'series_c']
+series_d_rounds = rounds[rounds.investment_type == 'series_d']
+series_e_rounds = rounds[rounds.investment_type == 'series_e']
+series_f_rounds = rounds[rounds.investment_type == 'series_f']
+series_g_rounds = rounds[rounds.investment_type == 'series_g']
+series_h_rounds = rounds[rounds.investment_type == 'series_h']
+series_i_rounds = rounds[rounds.investment_type == 'series_i']
+series_j_rounds = rounds[rounds.investment_type == 'series_j']
+series_k_rounds = rounds[rounds.investment_type == 'series_k']
+series_l_rounds = rounds[rounds.investment_type == 'series_l']
+
+venture_noseries_late = rounds[
+    (rounds.investment_type == 'series_unknown') & 
+    (rounds.raised_amount_usd >= int(15000001))
+    ]
+
+conv_note_late = rounds[
+    (rounds.investment_type == 'convertible_note') & 
+    (rounds.raised_amount_usd >= int(15000001))
+    ]
+
+venture_undisclosed_late = rounds[
+    (rounds.investment_type == 'undisclosed') & 
+    (rounds.raised_amount_usd >= int(15000001))
+    ]
+
+equity_crowdfunding_late = rounds[
+    (rounds.investment_type == 'equity_crowdfunding') & 
+    (rounds.raised_amount_usd >= int(15000001))
+    ]
+
+## Stage Aggregation
+
+late_stage_rounds = pd.concat([
+    series_c_rounds, 
+    series_d_rounds, 
+    series_e_rounds, 
+    series_f_rounds, 
+    series_g_rounds, 
+    series_h_rounds, 
+    series_i_rounds, 
+    series_j_rounds, 
+    series_k_rounds, 
+    series_l_rounds,
+    venture_noseries_late, 
+    conv_note_late,
+    venture_undisclosed_late,
+    equity_crowdfunding_late
+    ])    
