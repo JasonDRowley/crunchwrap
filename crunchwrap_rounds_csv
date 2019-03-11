@@ -32,7 +32,7 @@ equity_crowdfunding_nan = rounds[
 
 equity_crowdfunding_seed = rounds[
     (rounds.investment_type == 'equity_crowdfunding') & 
-    (rounds.raised_amount_usd <= int(1000000))
+    (rounds.raised_amount_usd <= int(5000000))
     ]
 
 ## Stage Aggregation
